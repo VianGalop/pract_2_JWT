@@ -36,10 +36,10 @@ app.get('/verify', (req, res) => {
     const decoded = verifyToken(token.split(' ')[1]) // el token se forma de dos  palabra "<bearer> token"
     console.log('decoded', decoded.exp * 1000)
     console.log('fecha:', Date.now())
-    if (Date.now() >= decoded.exp * 1000) {
-      res.status(401).send({ message: 'Token es inválido o ha expirado' })
-    } else {
+    if (Date.now() < decoded.exp * 1000) {
       res.status(200).send({ message: 'Token es válido y no ha expirado' })
+    } else {
+      res.status(401).send({ message: 'Token es inválido o ha expirado' })
       /* res.json({ message: `Bienvenido, ${decoded.usernames}!` }) */
     }
   } catch (error) {

@@ -7,7 +7,7 @@ export const generateToken = (payload) => {
 }
 
 export const verifyToken = (token) => {
-  return jwt.verify(token, secretKey, { expiresIn: '2m' }) // verifuca caducidad
+  return jwt.verify(token, secretKey) // verifuca caducidad
 }
 
 /* Math.floor(Date.now() / 1000) - 30  */
